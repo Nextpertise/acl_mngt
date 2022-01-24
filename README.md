@@ -28,3 +28,16 @@ af.render('cisco')
 # ip:inacl#17=deny ip host 2.2.3.8 172.16.8.0 0.0.0.255
 # ip:inacl#18=deny ip any any
 ```
+
+Exception example, typo in `in(n)gress`:
+```
+acl = """allow inngress 1.2.3.4/30"""
+af = AclFactory(acl, '192.168.1.0/24')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python3.9/site-packages/acl_mngt.py", line 196, in __init__
+    raise ValueError(str(e) + f" on line {line}.") from None
+ValueError: Not a valid ACL:
+'allow inngress 1.2.3.4/30'
+       ^ error at character 6 on line 1.
+```
