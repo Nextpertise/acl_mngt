@@ -1,0 +1,13 @@
+kind: pipeline
+type: docker
+
+steps:
+  - name: scan_fs
+    image: registry.nextpertise.tools/nextpertise-proxy/aquasec/trivy:0.14.0
+    commands:
+      - trivy --light fs --quiet --exit-code 1 .
+  - name: verify
+    image: registry.nextpertise.tools/nextpertise/python-poetry:master
+    commands:
+      - poetry install
+      - poetry run pytest
