@@ -180,7 +180,7 @@ class AclEntry:
 
 
 class AclFactory:
-    def __init__(self, accesslist: str, src_subnet: str, src_routed_subnets_list: list[str] = None):
+    def __init__(self, accesslist: str, src_subnet: str, src_routed_subnets_list: list[] = None):
         self.aclEntryList = []
         self.priority = 10
         acl_text_entry_list = accesslist.split('\n')
