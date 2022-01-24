@@ -11,3 +11,5 @@ steps:
     commands:
       - poetry install
       - poetry run pytest
+image_pull_secrets:
+  - platform_harbor_pull_secrets
