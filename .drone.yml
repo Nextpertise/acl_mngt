@@ -10,6 +10,7 @@ steps:
     image: registry.nextpertise.tools/nextpertise/python-poetry:3.8
     commands:
       - poetry install
-      - poetry run pytest || exit 0
+      - poetry run pytest
+      - poetry run pylint || exit 0
 image_pull_secrets:
   - platform_harbor_pull_secrets
