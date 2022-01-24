@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "acl_mngt"
-version = "0.1.4"
+version = "0.1.5"
 description = "Parse acl config as string, generate vendor specific config."
 authors = ["Teun Ouwehand <teun@nextpertise.nl>"]
 repository = "https://github.com/Nextpertise/acl_mngt/"

@@ -151,10 +151,10 @@ class AclEntry:
 
     def format_str(self, vendor: str):
         self.validate(raise_error=True)
-        a_subnet = self.src_subnet if self.direction == 'ingress' else self.dst_subnet
-        a_prefix_length = self.src_prefix_length if self.direction == 'ingress' else self.dst_prefix_length
-        b_subnet = self.dst_subnet if self.direction == 'ingress' else self.src_subnet
-        b_prefix_length = self.dst_prefix_length if self.direction == 'ingress' else self.src_prefix_length
+        a_subnet = self.src_subnet if self.direction == 'egress' else self.dst_subnet
+        a_prefix_length = self.src_prefix_length if self.direction == 'egress' else self.dst_prefix_length
+        b_subnet = self.dst_subnet if self.direction == 'egress' else self.src_subnet
+        b_prefix_length = self.dst_prefix_length if self.direction == 'egress' else self.src_prefix_length
         if vendor == 'cisco':
             s = f"ip:inacl#{self.priority}={'allow' if self.allow else 'deny'} ip " \
                 f"{'host' if a_prefix_length == 32 else ''} {a_subnet} " \
