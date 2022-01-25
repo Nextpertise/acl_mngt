@@ -156,7 +156,7 @@ class AclEntry:
         b_subnet = self.dst_subnet if self.direction == 'egress' else self.src_subnet
         b_prefix_length = self.dst_prefix_length if self.direction == 'egress' else self.src_prefix_length
         if vendor == 'cisco':
-            s = f"ip:inacl#{self.priority}={'allow' if self.allow else 'deny'} ip " \
+            s = f"ip:inacl#{self.priority}={'permit' if self.allow else 'deny'} ip " \
                 f"{'host' if a_prefix_length == 32 else ''} {a_subnet} " \
                 f"{self.wildcard_mask(a_prefix_length) if a_prefix_length != 32 else ''} " \
                 f"{'host' if b_prefix_length == 32 else ''} {b_subnet} " \

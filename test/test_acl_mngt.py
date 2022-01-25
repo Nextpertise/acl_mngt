@@ -8,8 +8,8 @@ allow ingress 1.2.3.8
 deny egress 2.2.3.4/30
 deny egress 2.2.3.8"""
 
-    expected_output = """ip:inacl#10=allow ip 1.2.3.4 0.0.0.3 192.168.1.0 0.0.0.255
-ip:inacl#11=allow ip host 1.2.3.8 192.168.1.0 0.0.0.255
+    expected_output = """ip:inacl#10=permit ip 1.2.3.4 0.0.0.3 192.168.1.0 0.0.0.255
+ip:inacl#11=permit ip host 1.2.3.8 192.168.1.0 0.0.0.255
 ip:inacl#12=deny ip 192.168.1.0 0.0.0.255 2.2.3.4 0.0.0.3
 ip:inacl#13=deny ip 192.168.1.0 0.0.0.255 host 2.2.3.8
 ip:inacl#14=deny ip any any"""
@@ -24,12 +24,12 @@ allow ingress 1.2.3.8
 deny egress 2.2.3.4/30
 deny egress 2.2.3.8"""
 
-    expected_output = """ip:inacl#10=allow ip 1.2.3.4 0.0.0.3 192.168.1.0 0.0.0.255
-ip:inacl#11=allow ip host 1.2.3.8 192.168.1.0 0.0.0.255
+    expected_output = """ip:inacl#10=permit ip 1.2.3.4 0.0.0.3 192.168.1.0 0.0.0.255
+ip:inacl#11=permit ip host 1.2.3.8 192.168.1.0 0.0.0.255
 ip:inacl#12=deny ip 192.168.1.0 0.0.0.255 2.2.3.4 0.0.0.3
 ip:inacl#13=deny ip 192.168.1.0 0.0.0.255 host 2.2.3.8
-ip:inacl#14=allow ip 1.2.3.4 0.0.0.3 172.16.8.0 0.0.0.255
-ip:inacl#15=allow ip host 1.2.3.8 172.16.8.0 0.0.0.255
+ip:inacl#14=permit ip 1.2.3.4 0.0.0.3 172.16.8.0 0.0.0.255
+ip:inacl#15=permit ip host 1.2.3.8 172.16.8.0 0.0.0.255
 ip:inacl#16=deny ip 172.16.8.0 0.0.0.255 2.2.3.4 0.0.0.3
 ip:inacl#17=deny ip 172.16.8.0 0.0.0.255 host 2.2.3.8
 ip:inacl#18=deny ip any any"""
@@ -47,16 +47,16 @@ deny egress 2.2.3.4/30
 deny egress 2.2.3.8
 # I'm a trailing comment"""
 
-    expected_output = """ip:inacl#10=allow ip 1.2.3.4 0.0.0.3 192.168.1.0 0.0.0.255
-ip:inacl#11=allow ip host 1.2.3.8 192.168.1.0 0.0.0.255
+    expected_output = """ip:inacl#10=permit ip 1.2.3.4 0.0.0.3 192.168.1.0 0.0.0.255
+ip:inacl#11=permit ip host 1.2.3.8 192.168.1.0 0.0.0.255
 ip:inacl#12=deny ip 192.168.1.0 0.0.0.255 2.2.3.4 0.0.0.3
 ip:inacl#13=deny ip 192.168.1.0 0.0.0.255 host 2.2.3.8
-ip:inacl#14=allow ip 1.2.3.4 0.0.0.3 172.16.8.0 0.0.0.255
-ip:inacl#15=allow ip host 1.2.3.8 172.16.8.0 0.0.0.255
+ip:inacl#14=permit ip 1.2.3.4 0.0.0.3 172.16.8.0 0.0.0.255
+ip:inacl#15=permit ip host 1.2.3.8 172.16.8.0 0.0.0.255
 ip:inacl#16=deny ip 172.16.8.0 0.0.0.255 2.2.3.4 0.0.0.3
 ip:inacl#17=deny ip 172.16.8.0 0.0.0.255 host 2.2.3.8
-ip:inacl#18=allow ip 1.2.3.4 0.0.0.3 host 10.20.30.8
-ip:inacl#19=allow ip host 1.2.3.8 host 10.20.30.8
+ip:inacl#18=permit ip 1.2.3.4 0.0.0.3 host 10.20.30.8
+ip:inacl#19=permit ip host 1.2.3.8 host 10.20.30.8
 ip:inacl#20=deny ip host 10.20.30.8 2.2.3.4 0.0.0.3
 ip:inacl#21=deny ip host 10.20.30.8 host 2.2.3.8
 ip:inacl#22=deny ip any any"""
