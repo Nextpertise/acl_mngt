@@ -187,7 +187,7 @@ class AclFactory:
         line = 1
         for acl_text_entry in acl_text_entry_list:
             acl_text_entry = acl_text_entry.strip()
-            if acl_text_entry == '':
+            if acl_text_entry == '' or acl_text_entry[0] == '#':
                 line += 1
                 continue
             try:
@@ -198,7 +198,12 @@ class AclFactory:
             self.priority += 1
         if src_routed_subnets_list:
             for rsubnet in src_routed_subnets_list:
+                line = 1
                 for acl_text_entry in acl_text_entry_list:
+                    acl_text_entry = acl_text_entry.strip()
+                    if acl_text_entry == '' or acl_text_entry[0] == '#':
+                        line += 1
+                        continue
                     self.aclEntryList.append(AclEntry(acl_text_entry, priority=self.priority, src_subnet=rsubnet))
                     self.priority += 1
 

@@ -39,10 +39,13 @@ ip:inacl#18=deny ip any any"""
 
 
 def test_happy_flow_two_routed_subnets():
-    acl = """allow ingress 1.2.3.4/30
-allow ingress 1.2.3.8
+    acl = """# This is a comment, and I should not be rendered.
+    allow ingress 1.2.3.4/30
+ allow ingress 1.2.3.8
+  # Halfway you can have comments too, I'm special, I have spaces before my hashtag
 deny egress 2.2.3.4/30
-deny egress 2.2.3.8"""
+deny egress 2.2.3.8
+# I'm a trailing comment"""
 
     expected_output = """ip:inacl#10=allow ip 1.2.3.4 0.0.0.3 192.168.1.0 0.0.0.255
 ip:inacl#11=allow ip host 1.2.3.8 192.168.1.0 0.0.0.255
