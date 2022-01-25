@@ -11,6 +11,6 @@ steps:
     commands:
       - poetry install
       - poetry run pytest
-      - poetry run pylint || exit 0
+      - poetry run pylint src || exit 0 # Ignore pylint failures as they are not as important as tests
 image_pull_secrets:
   - platform_harbor_pull_secrets

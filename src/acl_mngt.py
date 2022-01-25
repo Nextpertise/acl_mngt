@@ -151,10 +151,10 @@ class AclEntry:
 
     def format_str(self, vendor: str):
         self.validate(raise_error=True)
-        a_subnet = self.src_subnet if self.direction == 'ingress' else self.dst_subnet
-        a_prefix_length = self.src_prefix_length if self.direction == 'ingress' else self.dst_prefix_length
-        b_subnet = self.dst_subnet if self.direction == 'ingress' else self.src_subnet
-        b_prefix_length = self.dst_prefix_length if self.direction == 'ingress' else self.src_prefix_length
+        a_subnet = self.src_subnet if self.direction == 'egress' else self.dst_subnet
+        a_prefix_length = self.src_prefix_length if self.direction == 'egress' else self.dst_prefix_length
+        b_subnet = self.dst_subnet if self.direction == 'egress' else self.src_subnet
+        b_prefix_length = self.dst_prefix_length if self.direction == 'egress' else self.src_prefix_length
         if vendor == 'cisco':
             s = f"ip:inacl#{self.priority}={'allow' if self.allow else 'deny'} ip " \
                 f"{'host' if a_prefix_length == 32 else ''} {a_subnet} " \
@@ -180,14 +180,14 @@ class AclEntry:
 
 
 class AclFactory:
-    def __init__(self, accesslist: str, src_subnet: str, src_routed_subnets_list: list[str] = None):
+    def __init__(self, accesslist: str, src_subnet: str, src_routed_subnets_list: list = None):
         self.aclEntryList = []
         self.priority = 10
         acl_text_entry_list = accesslist.split('\n')
         line = 1
         for acl_text_entry in acl_text_entry_list:
             acl_text_entry = acl_text_entry.strip()
-            if acl_text_entry == '':
+            if acl_text_entry == '' or acl_text_entry[0] == '#':
                 line += 1
                 continue
             try:
@@ -198,7 +198,12 @@ class AclFactory:
             self.priority += 1
         if src_routed_subnets_list:
             for rsubnet in src_routed_subnets_list:
+                line = 1
                 for acl_text_entry in acl_text_entry_list:
+                    acl_text_entry = acl_text_entry.strip()
+                    if acl_text_entry == '' or acl_text_entry[0] == '#':
+                        line += 1
+                        continue
                     self.aclEntryList.append(AclEntry(acl_text_entry, priority=self.priority, src_subnet=rsubnet))
                     self.priority += 1
 
