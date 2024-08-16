@@ -1,0 +1,33 @@
+name: main
+on: push
+
+  scan_fs:
+    runs-on: k3s-runners
+    container: 
+      image: registry.nextpertise.tools/nextpertise-proxy/aquasec/trivy:0.14.0
+      credentials:
+        username: ${{ secrets.REGISTRY_NEXTPERTISE_TOOLS_ACCOUNT }}
+        password: ${{ secrets.REGISTRY_NEXTPERTISE_TOOLS_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: scan fs
+        run: trivy --light fs --quiet --exit-code 1 .
+
+  unittest:
+    runs-on: k3s-runners
+    container: 
+      image: registry.nextpertise.tools/nextpertise/python-poetry:3.9
+      credentials:
+        username: ${{ secrets.REGISTRY_NEXTPERTISE_TOOLS_ACCOUNT }}
+        password: ${{ secrets.REGISTRY_NEXTPERTISE_TOOLS_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run unittest
+        run: |
+          poetry install
+          poetry run pytest
+          poetry run pylint src test || exit 0 # Ignore pylint failures as they are not as important as tests
