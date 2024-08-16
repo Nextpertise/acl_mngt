@@ -18,7 +18,7 @@ on: push
   unittest:
     runs-on: k3s-runners
     container: 
-      image: registry.nextpertise.tools/nextpertise/python-poetry:3.9
+      image: registry.nextpertise.tools/nextpertise/python-poetry:3.8
       credentials:
         username: ${{ secrets.REGISTRY_NEXTPERTISE_TOOLS_ACCOUNT }}
         password: ${{ secrets.REGISTRY_NEXTPERTISE_TOOLS_KEY }}
