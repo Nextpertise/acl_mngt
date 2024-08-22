@@ -3,7 +3,7 @@ on: push
 
 jobs:
 #  scan_fs:
-#    runs-on: k3s-runners
+#    runs-on: ubuntu-latest
 #    container: 
 #      image: registry.nextpertise.tools/nextpertise-proxy/aquasec/trivy:0.14.0
 #      credentials:
@@ -17,7 +17,7 @@ jobs:
 #        run: trivy --light fs --quiet --exit-code 1 .
 
   unittest:
-    runs-on: k3s-runners
+    runs-on: ubuntu-latest
     container: 
       image: registry.nextpertise.tools/nextpertise/python-poetry:3.8
       credentials:
