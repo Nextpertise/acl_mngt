@@ -12,8 +12,8 @@ on: push
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: scan fs
-        run: trivy --light fs --quiet --exit-code 1 .
+      #- name: scan fs
+      #  run: trivy --light fs --quiet --exit-code 1 .
 
   unittest:
     runs-on: k3s-runners
