@@ -5,13 +5,13 @@ jobs:
   scan_fs:
     runs-on: ubuntu-latest
     container: 
-      image: aquasec/trivy:0.14.0
+      image: aquasec/trivy:0.54.1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: scan fs
-        run: trivy --light fs --quiet --exit-code 1 .
+        run: trivy fs --quiet --exit-code 1 .
 
   unittest:
     runs-on: ubuntu-latest
