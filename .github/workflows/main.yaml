@@ -3,7 +3,7 @@ on: push
 
 jobs:
   scan_fs:
-    runs-on: ubuntu-latest
+    runs-on: public-runners
     container: 
       image: aquasec/trivy:0.54.1
     steps:
@@ -14,7 +14,7 @@ jobs:
         run: trivy fs --quiet --exit-code 1 .
 
   unittest:
-    runs-on: ubuntu-latest
+    runs-on: public-runners
     container: 
       image: mwalbeck/python-poetry:1-3.8
     steps:
